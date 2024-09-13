@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ApiService } from './service/api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'Angular-API-Master';
+  constructor(private apiService:ApiService){}
+
+  ngOnInit(){
+    this.apiService.getPost().subscribe(data => console.log(data));
+  }
 }
