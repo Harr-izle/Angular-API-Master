@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../interface/post';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  getPost(){
+  getPost():Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl);
   }
 
