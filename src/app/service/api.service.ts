@@ -7,13 +7,30 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class ApiService {
-  apiUrl:string ='https://jsonplaceholder.typicode.com/posts'
+  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getPost():Observable<Post[]> {
+  getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl);
   }
 
+  getPost(id: number): Observable<Post> {
+    return this.http.get<Post>(`${this.apiUrl}/${id}`);
+  }
 
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl, post);
+  }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.apiUrl}/${post.id}`, post);
+  }
+
+  deletePost(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
+
+
+
