@@ -1,0 +1,50 @@
+@use '../../../styles/mixins';
+@use '../../../styles/variables';
+
+.pagination {
+    @include mixins.flex-layout(row, center, center);
+    gap: 3rem;
+    margin-top: 2rem; 
+
+    span{
+        color: variables.$font-color-white;
+        font-size: variables.$font-size-sm;
+    }
+
+    .btn-pre{
+        background-color: variables.$button-previous;
+        color: variables.$font-color-white;
+        border: none;
+        border-radius: variables.$border-radius-one;
+        padding: 0.5rem;
+        font-size: variables.$font-size-sm;
+
+        &:hover{
+            cursor: pointer;
+        }
+        &:disabled{
+            background-color: variables.$button-previous-disabled;
+            cursor: not-allowed;
+            color: variables.$background-color;
+        }
+
+    }
+
+    .btn-next{
+        background-color: variables.$button-next;
+        color: variables.$font-color-white;
+        border: none;
+        border-radius: variables.$border-radius-one;
+        padding: 0.5rem;
+        font-size: variables.$font-size-sm;
+        &:hover{
+            cursor: pointer;
+        }
+        &:disabled{
+            background-color: variables.$button-next-disabled;
+            cursor: not-allowed;
+            color: variables.$background-color;
+        }
+    }
+
+}

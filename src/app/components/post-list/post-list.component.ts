@@ -21,6 +21,9 @@ export class PostListComponent {
   posts$: Observable<Post[]>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
+  currentPage: number = 1;
+  totalPages: number = 10; // This should be calculated based on total number of posts
+  postsPerPage: number = 10;
 
  
 constructor(private store: Store<AppState>) {
@@ -33,8 +36,15 @@ ngOnInit() {
   console.log('PostListComponent: Dispatching loadPosts action');
   this.store.dispatch(PostActions.loadPosts({ page: 1, limit: 10 }));
 }
+loadPosts() {
+  this.store.dispatch(PostActions.loadPosts({ page: this.currentPage, limit: this.postsPerPage }));
+}
 
   deletePost(id: number) {
     this.store.dispatch(PostActions.deletePost({ id }));
+  }
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.loadPosts();
   }
 }
