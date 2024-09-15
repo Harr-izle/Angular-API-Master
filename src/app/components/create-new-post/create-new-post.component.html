@@ -1,17 +1,20 @@
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="title">Title:</label>
+<div class="create-post">
+  <h2>Create New Post</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="title">
+      <label for="title">Title</label>
       <input id="title" type="text" formControlName="title">
       @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
-        <p>Title is required</p>
+        <span>Title is required</span>
       }
     </div>
-    <div>
-      <label for="body">Body:</label>
+    <div class="title-title">
+      <label for="body">Body</label>
       <textarea id="body" formControlName="body"></textarea>
       @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
-        <p>Body is required</p>
+        <span>Body is required</span>
       }
     </div>
-    <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+    <button class="btn-create" type="submit" [disabled]="postForm.invalid">Create Post</button>
   </form>
+</div>

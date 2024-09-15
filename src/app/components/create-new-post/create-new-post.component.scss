@@ -1,0 +1,70 @@
+@use '../../../styles/mixins';
+@use '../../../styles/variables';
+
+.create-post{
+    @include mixins.flex-layout(column, 4rem);
+    box-shadow: 0 0 10px 2px variables.$box-shadow-color;
+    width: variables.$width-xl;
+    height: variables.$height-xl;
+    margin-top: 4rem;
+    border-radius: variables.$border-radius-one;
+
+    h2{
+        font-size: variables.$font-size-lg;
+        color: variables.$font-color-white;
+        margin-top:1rem;
+    }
+
+    form{
+        @include mixins.flex-layout(column, 5rem);
+        margin-top: 3rem;
+
+        input{
+            border: variables.$border-color 1px solid;
+            border-radius: variables.$border-radius-one;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            width: variables.$width-lg;
+            &:focus{
+                outline: none;
+            }
+        }
+
+        textarea{
+            width: variables.$width-lg;
+            height: variables.$height-lg;
+            border-radius: variables.$border-radius-one;
+            padding: 1rem;
+            &:focus{
+                outline: none;
+            }
+        }
+        .title{
+            @include mixins.flex-layout(column, 1rem);
+        }
+        .title-title{
+            @include mixins.flex-layout(column, 1rem);
+        }
+        label{
+            color: variables.$font-color-white;
+            font-size: variables.$font-size-md;
+            margin-bottom: 1rem;
+        }
+        .btn-create{
+            margin-top: 1rem;
+            background-color: variables.$button-color;
+            color: variables.$font-color-white;
+            border: none;
+            border-radius: variables.$border-radius-one;
+            padding: 0.5rem;
+            font-size: variables.$font-size-sm;
+            margin-bottom: 2rem;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    
+}
