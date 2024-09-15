@@ -5,6 +5,7 @@
 } @else {
   <div class="post-list">
     <h6>Posts</h6>
+    <!-- <button [routerLink]="['/edit', post.id]">Create</button> -->
     @for (post of posts$ | async; track post.id) {
       <div class="post">
        <div class="post-post">
@@ -13,6 +14,7 @@
      <div class="btn-link">
       <a [routerLink]="['/post', post.id]">View Details</a>
       <button (click)="deletePost(post.id)">Delete</button>
+      <button [routerLink]="['/edit', post.id]">Edit</button>
      </div>
        </div>
       </div>

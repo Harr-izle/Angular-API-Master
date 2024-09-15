@@ -3,14 +3,14 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
     <h3>Comments</h3>
-    <ul>
+    <div class="comments">
       @for (comment of comments$ | async; track comment.id) {
-        <li>
+        <div class="comment">
           <strong>{{ comment.name }}</strong>
           <p>{{ comment.body }}</p>
-        </li>
+        </div>
       }
-    </ul>
+    </div>
   } @else {
     <p>Loading post...</p>
   }

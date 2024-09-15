@@ -1,21 +1,24 @@
 @if (post$ | async; as post) {
-    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="title">Title:</label>
-        <input id="title" type="text" formControlName="title">
-        @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
-          <p>Title is required</p>
-        }
-      </div>
-      <div>
-        <label for="body">Body:</label>
-        <textarea id="body" formControlName="body"></textarea>
-        @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
-          <p>Body is required</p>
-        }
-      </div>
-      <button type="submit" [disabled]="postForm.invalid">Update Post</button>
-    </form>
+    <div class="edit-post">
+      <h2>Edit Post</h2>
+      <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <div class="title">
+          <label for="title">Title</label>
+          <input id="title" type="text" formControlName="title">
+          @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
+            <span>Title is required</span>
+          }
+        </div>
+        <div class="title-title">
+          <label for="body">Body:</label>
+          <textarea id="body" formControlName="body"></textarea>
+          @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
+            <span>Body is required</span>
+          }
+        </div>
+        <button class="btn-create" type="submit" [disabled]="postForm.invalid">Update Post</button>
+      </form>
+    </div>
   } @else {
     <p>Loading post...</p>
   }

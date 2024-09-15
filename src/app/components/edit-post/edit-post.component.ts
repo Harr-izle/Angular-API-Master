@@ -1,14 +1,13 @@
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from '../../interfaces/post';
 import { selectPostById } from '../../state/post.selectors';
-import * as PostActions from '../../state/post.actions';  // Import actions correctly
+import * as PostActions from '../../state/post.actions';
 import { CommonModule } from '@angular/common';
-import { AppState } from '../../state/post.state';  // Ensure correct AppState import
+import { AppState } from '../../state/post.state';
 
 @Component({
   selector: 'app-edit-post',
@@ -17,7 +16,7 @@ import { AppState } from '../../state/post.state';  // Ensure correct AppState i
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss'
 })
-export class EditPostComponent {
+export class EditPostComponent implements OnInit {
   post$: Observable<Post | undefined>;
   postForm = this.fb.group({
     id: [0],
@@ -29,24 +28,26 @@ export class EditPostComponent {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private store: Store<AppState>  // Make sure to specify Store<AppState>
+    private router: Router,
+    private store: Store<AppState>
   ) {
     const postId = Number(this.route.snapshot.paramMap.get('id'));
-    this.post$ = this.store.select(selectPostById(postId));  // Correct selector usage
+    this.post$ = this.store.select(selectPostById(postId));
   }
 
   ngOnInit() {
     this.post$.subscribe(post => {
       if (post) {
-        this.postForm.patchValue(post);  // Patch the form with the post data
+        this.postForm.patchValue(post);
       }
     });
   }
 
   onSubmit() {
     if (this.postForm.valid) {
-      this.store.dispatch(PostActions.updatePost({ post: this.postForm.value as Post }));  // Dispatch update action
+      const updatedPost = this.postForm.value as Post;
+      this.store.dispatch(PostActions.updatePost({ post: updatedPost }));
+      this.router.navigate(['/posts']);
     }
   }
 }
-
