@@ -1,1 +1,16 @@
-<p>post-list works!</p>
+@if (loading$ | async) {
+  <p>Loading posts...</p>
+} @else if (error$ | async) {
+  <p>Error: {{ error$ | async }}</p>
+} @else {
+  <ul>
+    @for (post of posts$ | async; track post.id) {
+      <li>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.body }}</p>
+        <a [routerLink]="['/post', post.id]">View Details</a>
+        <button (click)="deletePost(post.id)">Delete</button>
+      </li>
+    }
+  </ul>
+}

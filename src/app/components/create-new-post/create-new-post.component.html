@@ -1,1 +1,17 @@
-<p>create-new-post works!</p>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" type="text" formControlName="title">
+      @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
+        <p>Title is required</p>
+      }
+    </div>
+    <div>
+      <label for="body">Body:</label>
+      <textarea id="body" formControlName="body"></textarea>
+      @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
+        <p>Body is required</p>
+      }
+    </div>
+    <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+  </form>

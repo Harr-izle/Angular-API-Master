@@ -1,1 +1,16 @@
-<p>post works!</p>
+
+@if (post$ | async; as post) {
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+    <h3>Comments</h3>
+    <ul>
+      @for (comment of comments$ | async; track comment.id) {
+        <li>
+          <strong>{{ comment.name }}</strong>
+          <p>{{ comment.body }}</p>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p>Loading post...</p>
+  }
