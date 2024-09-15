@@ -3,14 +3,19 @@
 } @else if (error$ | async) {
   <p>Error: {{ error$ | async }}</p>
 } @else {
-  <ul>
+  <div class="post-list">
+    <h6>Posts</h6>
     @for (post of posts$ | async; track post.id) {
-      <li>
+      <div class="post">
+       <div class="post-post">
         <h3>{{ post.title }}</h3>
         <p>{{ post.body }}</p>
-        <a [routerLink]="['/post', post.id]">View Details</a>
-        <button (click)="deletePost(post.id)">Delete</button>
-      </li>
+     <div class="btn-link">
+      <a [routerLink]="['/post', post.id]">View Details</a>
+      <button (click)="deletePost(post.id)">Delete</button>
+     </div>
+       </div>
+      </div>
     }
-  </ul>
+  </div>
 }

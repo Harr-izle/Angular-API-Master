@@ -1,0 +1,63 @@
+@use '../../../styles/mixins';
+@use '../../../styles/variables';
+
+.post-list {
+    @include mixins.flex-layout(column, center, center, wrap, 1rem);
+
+    h6 {
+        font-size: variables.$font-size-lg;
+        color: variables.$font-color-white;
+        margin-top: 2rem;
+    }
+
+    .post {
+        @include mixins.flex-layout(row,wrap center, center);
+        box-shadow: 0 0 10px 2px variables.$box-shadow-color;
+        width: variables.$width-lg;
+        height: variables.$height-xs;
+        margin-top: 4rem;
+        border-radius: variables.$border-radius-one;
+        padding: 2rem;
+      
+        .post-post {
+            @include mixins.flex-layout(column,wrap center, center, 1rem);
+
+            h3 {
+                font-size: variables.$font-size-md;
+                color: 	#F3E5AB;
+      
+            }
+
+            p {
+                font-size: variables.$font-size-sm;
+                color: variables.$font-color-white;
+                margin-top: 1rem;
+            }
+
+            .btn-link {
+                @include mixins.flex-layout(row, center, center);
+                gap: 2rem;
+                margin-top: 1rem;
+
+                a {
+                    text-decoration: none;
+                    color: variables.$font-color-white;
+                    font-size: variables.$font-size-sm;
+                }
+
+                button {
+                    background-color: variables.$button-color;
+                    color: variables.$font-color-white;
+                    border: none;
+                    border-radius: variables.$border-radius-one;
+                    padding: 0.5rem;
+                    font-size: variables.$font-size-sm;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+}

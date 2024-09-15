@@ -50,6 +50,10 @@
             font-size: variables.$font-size-md;
             margin-bottom: 1rem;
         }
+        span{
+            color: variables.$error-color;
+            font-size: variables.$font-size-sm;
+        }
         .btn-create{
             margin-top: 1rem;
             background-color: variables.$button-color;
