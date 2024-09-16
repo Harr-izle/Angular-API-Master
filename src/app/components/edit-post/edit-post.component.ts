@@ -8,6 +8,7 @@ import { selectPostById } from '../../state/post.selectors';
 import * as PostActions from '../../state/post.actions';
 import { CommonModule } from '@angular/common';
 import { AppState } from '../../state/post.state';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -29,7 +30,8 @@ export class EditPostComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private notificationService: NotificationService
   ) {
     const postId = Number(this.route.snapshot.paramMap.get('id'));
     this.post$ = this.store.select(selectPostById(postId));
@@ -47,7 +49,9 @@ export class EditPostComponent implements OnInit {
     if (this.postForm.valid) {
       const updatedPost = this.postForm.value as Post;
       this.store.dispatch(PostActions.updatePost({ post: updatedPost }));
+      this.notificationService.show('Post Edited Successfully');
       this.router.navigate(['/posts']);
+
     }
   }
 }

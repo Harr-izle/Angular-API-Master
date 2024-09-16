@@ -8,6 +8,7 @@ import { selectAllPosts, selectPostsLoading, selectPostsError } from '../../stat
 import { RouterLink } from '@angular/router';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { AppState } from '../../state/post.state';
+import { NotificationService } from '../../service/notification.service';
 
 
 @Component({
@@ -26,10 +27,11 @@ export class PostListComponent {
   postsPerPage: number = 10;
 
  
-constructor(private store: Store<AppState>) {
+constructor(private store: Store<AppState>,private notificationService: NotificationService) {
   this.posts$ = this.store.select(selectAllPosts);
   this.loading$ = this.store.select(selectPostsLoading);
   this.error$ = this.store.select(selectPostsError);
+  
 }
 
 ngOnInit() {
@@ -42,6 +44,7 @@ loadPosts() {
 
   deletePost(id: number) {
     this.store.dispatch(PostActions.deletePost({ id }));
+    this.notificationService.show('Post deleted successfully');
   }
   onPageChange(page: number) {
     this.currentPage = page;
