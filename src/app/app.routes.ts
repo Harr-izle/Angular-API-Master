@@ -1,14 +1,22 @@
 import { Routes } from '@angular/router';
-import { CreateNewPostComponent } from './components/create-new-post/create-new-post.component';
-import { EditPostComponent } from './components/edit-post/edit-post.component';
-import { PostListComponent } from './components/post-list/post-list.component';
-import { PostComponent } from './components/post/post.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/posts', pathMatch: 'full' },
-    { path: 'posts', component: PostListComponent },
-    { path: 'post/:id', component: PostComponent },
-    { path: 'create', component: CreateNewPostComponent },
-    { path: 'edit/:id', component: EditPostComponent },
-    { path: '**', redirectTo: '/posts' }
+  { path: '', redirectTo: '/posts', pathMatch: 'full' },
+  {
+    path: 'posts',
+    loadComponent: () => import('./components/post-list/post-list.component').then(m => m.PostListComponent)
+  },
+  {
+    path: 'post/:id',
+    loadComponent: () => import('./components/post/post.component').then(m => m.PostComponent)
+  },
+  {
+    path: 'create',
+    loadComponent: () => import('./components/create-new-post/create-new-post.component').then(m => m.CreateNewPostComponent)
+  },
+  {
+    path: 'edit/:id',
+    loadComponent: () => import('./components/edit-post/edit-post.component').then(m => m.EditPostComponent)
+  },
+  { path: '**', redirectTo: '/posts' }
 ];
