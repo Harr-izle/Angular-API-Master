@@ -44,9 +44,20 @@
                     color: variables.$font-color-white;
                     font-size: variables.$font-size-sm;
                 }
+                .btn-delete{
+                    background-color: variables.$button-color;
+                    color: variables.$font-color-white;
+                    border: none;
+                    border-radius: variables.$border-radius-one;
+                    padding: 0.5rem;
+                    font-size: variables.$font-size-sm;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
 
                 button {
-                    background-color: variables.$button-color;
+                    background-color: variables.$button-edit;
                     color: variables.$font-color-white;
                     border: none;
                     border-radius: variables.$border-radius-one;

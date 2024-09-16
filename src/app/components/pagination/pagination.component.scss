@@ -5,6 +5,7 @@
     @include mixins.flex-layout(row, center, center);
     gap: 3rem;
     margin-top: 2rem; 
+    margin-bottom: 3rem;
 
     span{
         color: variables.$font-color-white;
