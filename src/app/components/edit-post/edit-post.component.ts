@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ import { NotificationService } from '../../service/notification.service';
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss'
 })
-export class EditPostComponent implements OnInit {
+export class EditPostComponent{
   post$: Observable<Post | undefined>;
   postForm = this.fb.group({
     id: [0],
