@@ -5,6 +5,7 @@
 } @else {
   <div class="post-list">
     <h6>Posts</h6>
+    <button class="create-post" [routerLink]="['/create']">Create New Post</button>
     @for (post of posts$ | async; track post.id) {
       <div class="post">
        <div class="post-post">

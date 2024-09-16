@@ -9,6 +9,20 @@
         color: variables.$font-color-white;
         margin-top: 2rem;
     }
+    .create-post{
+        background-color: variables.$button-color;
+        color: variables.$font-color-white;
+        border: none;
+        border-radius: variables.$border-radius-one;
+        padding: 0.5rem;
+        font-size: variables.$font-size-sm;
+        margin-left: 50rem;
+        &:hover{
+            cursor: pointer;
+
+        }
+    }
+
 
     .post {
         @include mixins.flex-layout(row,wrap center, center);
@@ -27,7 +41,7 @@
                 color: 	#F3E5AB;
       
             }
-
+            
             p {
                 font-size: variables.$font-size-sm;
                 color: variables.$font-color-white;

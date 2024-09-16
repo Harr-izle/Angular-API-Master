@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { postReducer } from './state/post.reducers';
 import { PostEffects } from './state/post.effects';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore({ posts: postReducer }),
     provideEffects([PostEffects]),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

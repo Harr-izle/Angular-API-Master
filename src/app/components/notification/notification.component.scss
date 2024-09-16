@@ -1,0 +1,38 @@
+@use '../../../styles/mixins';
+@use '../../../styles/variables';
+
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 34.375rem;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: fadeInOut 5s ease-in-out;
+}
+
+/* Define the keyframes for the animation */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); /* Slide in from the top */
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px); /* Slide out to the top */
+    }
+}

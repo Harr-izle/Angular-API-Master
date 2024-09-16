@@ -5,11 +5,12 @@ import { PostComponent } from "./components/post/post.component";
 import { PostListComponent } from "./components/post-list/post-list.component";
 import { CreateNewPostComponent } from "./components/create-new-post/create-new-post.component";
 import { EditPostComponent } from "./components/edit-post/edit-post.component";
+import { NotificationComponent } from "./components/notification/notification.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PostComponent, PostListComponent, CreateNewPostComponent, EditPostComponent],
+  imports: [RouterOutlet, PostComponent, PostListComponent, CreateNewPostComponent, EditPostComponent, NotificationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
