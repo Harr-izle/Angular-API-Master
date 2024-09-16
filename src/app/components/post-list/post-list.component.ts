@@ -23,6 +23,9 @@ import { ModalService } from '../../services/modal.service';
   styleUrl: './post-list.component.scss',
 })
 export class PostListComponent {
+  posts(posts: any) {
+    throw new Error('Method not implemented.');
+  }
   posts$: Observable<Post[]>;
   loading$: Observable<boolean>;
   error$: Observable<any>;

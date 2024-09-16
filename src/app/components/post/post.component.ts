@@ -17,8 +17,12 @@ import { Comment } from '../../interfaces/comment';
   styleUrl: './post.component.scss'
 })
 export class PostComponent {
+  onPostClick(onPostClick: any) {
+    throw new Error('Method not implemented.');
+  }
   post$: Observable<Post | undefined>;
   comments$: Observable<Comment[]>;
+  post: Post;
 
   constructor(
     private route: ActivatedRoute,
