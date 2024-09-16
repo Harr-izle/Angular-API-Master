@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -8,22 +8,22 @@ import { selectPostById } from '../../state/post.selectors';
 import * as PostActions from '../../state/post.actions';
 import { CommonModule } from '@angular/common';
 import { AppState } from '../../state/post.state';
-import { NotificationService } from '../../service/notification.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-edit-post',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edit-post.component.html',
-  styleUrl: './edit-post.component.scss'
+  styleUrl: './edit-post.component.scss',
 })
-export class EditPostComponent{
+export class EditPostComponent {
   post$: Observable<Post | undefined>;
   postForm = this.fb.group({
     id: [0],
     title: ['', Validators.required],
     body: ['', Validators.required],
-    userId: [0]
+    userId: [0],
   });
 
   constructor(
@@ -38,7 +38,7 @@ export class EditPostComponent{
   }
 
   ngOnInit() {
-    this.post$.subscribe(post => {
+    this.post$.subscribe((post) => {
       if (post) {
         this.postForm.patchValue(post);
       }
@@ -51,7 +51,6 @@ export class EditPostComponent{
       this.store.dispatch(PostActions.updatePost({ post: updatedPost }));
       this.notificationService.show('Post Edited Successfully');
       this.router.navigate(['/posts']);
-
     }
   }
 }

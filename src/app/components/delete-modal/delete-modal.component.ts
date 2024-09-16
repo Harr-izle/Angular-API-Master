@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ModalService } from '../../service/modal.service';
-import { NotificationService } from '../../service/notification.service';
+import { ModalService } from '../../services/modal.service';
+import { NotificationService } from '../../services/notification.service';
 import { AppState } from '../../state/post.state';
 import * as PostActions from '../../state/post.actions';
 import { Subscription } from 'rxjs';
@@ -12,10 +12,9 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './delete-modal.component.html',
-  styleUrl: './delete-modal.component.scss'
+  styleUrl: './delete-modal.component.scss',
 })
 export class DeleteModalComponent {
-
   isOpen$ = this.modalService.isOpen$;
   postIdSubscription: Subscription | undefined;
   currentPostId: number | null = null;
@@ -31,7 +30,7 @@ export class DeleteModalComponent {
     window.addEventListener('click', this.onWindowClick);
 
     // Subscribe to postId changes
-    this.postIdSubscription = this.modalService.postId$.subscribe(id => {
+    this.postIdSubscription = this.modalService.postId$.subscribe((id) => {
       this.currentPostId = id;
     });
   }
@@ -47,7 +46,7 @@ export class DeleteModalComponent {
     if (e.target === document.querySelector('.del-modal')) {
       this.onCancel();
     }
-  }
+  };
 
   onCancel() {
     this.modalService.closeModal();
@@ -60,5 +59,4 @@ export class DeleteModalComponent {
       this.modalService.closeModal();
     }
   }
-
 }

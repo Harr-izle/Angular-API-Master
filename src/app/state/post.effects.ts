@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '../service/api.service';
+import { ApiService } from '../services/api.service';
 import * as PostActions from './post.actions';
 
 @Injectable()
@@ -25,11 +25,11 @@ export class PostEffects {
       tap(() => console.log('PostEffects: loadPosts action received')),
       mergeMap(({ page, limit }) =>
         this.apiService.getPosts(page, limit).pipe(
-          map(posts => {
+          map((posts) => {
             console.log('PostEffects: Posts loaded successfully', posts);
             return PostActions.loadPostsSuccess({ posts });
           }),
-          catchError(error => {
+          catchError((error) => {
             console.error('PostEffects: Error loading posts', error);
             return of(PostActions.loadPostsFailure({ error }));
           })
@@ -43,8 +43,10 @@ export class PostEffects {
       ofType(PostActions.createPost),
       mergeMap(({ post }) =>
         this.apiService.createPost(post).pipe(
-          map(createdPost => PostActions.createPostSuccess({ post: createdPost })),
-          catchError(error => of(PostActions.createPostFailure({ error })))
+          map((createdPost) =>
+            PostActions.createPostSuccess({ post: createdPost })
+          ),
+          catchError((error) => of(PostActions.createPostFailure({ error })))
         )
       )
     )
@@ -55,8 +57,10 @@ export class PostEffects {
       ofType(PostActions.updatePost),
       mergeMap(({ post }) =>
         this.apiService.updatePost(post).pipe(
-          map(updatedPost => PostActions.updatePostSuccess({ post: updatedPost })),
-          catchError(error => of(PostActions.updatePostFailure({ error })))
+          map((updatedPost) =>
+            PostActions.updatePostSuccess({ post: updatedPost })
+          ),
+          catchError((error) => of(PostActions.updatePostFailure({ error })))
         )
       )
     )
@@ -68,7 +72,7 @@ export class PostEffects {
       mergeMap(({ id }) =>
         this.apiService.deletePost(id).pipe(
           map(() => PostActions.deletePostSuccess({ id })),
-          catchError(error => of(PostActions.deletePostFailure({ error })))
+          catchError((error) => of(PostActions.deletePostFailure({ error })))
         )
       )
     )
@@ -79,15 +83,14 @@ export class PostEffects {
       ofType(PostActions.loadComments),
       mergeMap(({ postId }) =>
         this.apiService.getComments(postId).pipe(
-          map(comments => PostActions.loadCommentsSuccess({ postId, comments })),
-          catchError(error => of(PostActions.loadCommentsFailure({ error })))
+          map((comments) =>
+            PostActions.loadCommentsSuccess({ postId, comments })
+          ),
+          catchError((error) => of(PostActions.loadCommentsFailure({ error })))
         )
       )
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private apiService: ApiService
-  ) {}
+  constructor(private actions$: Actions, private apiService: ApiService) {}
 }

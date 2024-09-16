@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotificationService } from '../../service/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: './notification.component.html',
-  styleUrl: './notification.component.scss'
+  styleUrl: './notification.component.scss',
 })
 export class NotificationComponent {
   message: string | null = null;
@@ -17,7 +17,7 @@ export class NotificationComponent {
 
   ngOnInit() {
     this.subscription = this.notificationService.notifications$.subscribe(
-      message => {
+      (message) => {
         this.message = message;
       }
     );
@@ -28,5 +28,4 @@ export class NotificationComponent {
       this.subscription.unsubscribe();
     }
   }
-
 }
