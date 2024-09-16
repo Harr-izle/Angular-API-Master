@@ -4,32 +4,37 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CacheService {
-  private cache: { [key: string]: { data: any; timestamp: number } } = {};
   private readonly cacheDuration = 5 * 60 * 1000; // 5 minutes
 
   set(key: string, data: any): void {
-    this.cache[key] = {
+    const item = {
       data,
       timestamp: Date.now()
     };
+    localStorage.setItem(key, JSON.stringify(item));
   }
 
   get(key: string): any | null {
-    const cached = this.cache[key];
-    if (!cached) {
+    const item = localStorage.getItem(key);
+    if (!item) {
       return null;
     }
 
-    const isExpired = Date.now() - cached.timestamp > this.cacheDuration;
+    const parsedItem = JSON.parse(item);
+    const isExpired = Date.now() - parsedItem.timestamp > this.cacheDuration;
     if (isExpired) {
-      delete this.cache[key];
+      localStorage.removeItem(key);
       return null;
     }
 
-    return cached.data;
+    return parsedItem.data;
   }
 
   clear(): void {
-    this.cache = {};
+    localStorage.clear();
+  }
+
+  remove(key: string): void {
+    localStorage.removeItem(key);
   }
 }
