@@ -1,1 +1,11 @@
-<p>delete-modal works!</p>
+@if (isOpen$ | async) {
+  <div class="del-modal">
+    <div class="del">
+      <h3>Are you sure you want to delete this post?</h3>
+      <div class="buttons">
+        <button class="btn-cancel" (click)="onCancel()">Cancel</button>
+        <button class="btn-delete" (click)="onConfirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+}

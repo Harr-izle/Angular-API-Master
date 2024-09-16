@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { AppState } from '../../state/post.state';
 import { NotificationService } from '../../service/notification.service';
+import { ModalService } from '../../service/modal.service';
 
 
 @Component({
@@ -23,29 +24,31 @@ export class PostListComponent {
   loading$: Observable<boolean>;
   error$: Observable<any>;
   currentPage: number = 1;
-  totalPages: number = 10; // This should be calculated based on total number of posts
+  totalPages: number = 10;
   postsPerPage: number = 10;
 
- 
-constructor(private store: Store<AppState>,private notificationService: NotificationService) {
-  this.posts$ = this.store.select(selectAllPosts);
-  this.loading$ = this.store.select(selectPostsLoading);
-  this.error$ = this.store.select(selectPostsError);
-  
-}
-
-ngOnInit() {
-  console.log('PostListComponent: Dispatching loadPosts action');
-  this.store.dispatch(PostActions.loadPosts({ page: 1, limit: 10 }));
-}
-loadPosts() {
-  this.store.dispatch(PostActions.loadPosts({ page: this.currentPage, limit: this.postsPerPage }));
-}
-
-  deletePost(id: number) {
-    this.store.dispatch(PostActions.deletePost({ id }));
-    this.notificationService.show('Post deleted successfully');
+  constructor(
+    private store: Store<AppState>,
+    private notificationService: NotificationService,
+    private modalService: ModalService
+  ) {
+    this.posts$ = this.store.select(selectAllPosts);
+    this.loading$ = this.store.select(selectPostsLoading);
+    this.error$ = this.store.select(selectPostsError);
   }
+
+  ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.store.dispatch(PostActions.loadPosts({ page: this.currentPage, limit: this.postsPerPage }));
+  }
+
+  openDeleteModal(id: number) {
+    this.modalService.openModal(id);
+  }
+
   onPageChange(page: number) {
     this.currentPage = page;
     this.loadPosts();

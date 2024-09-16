@@ -8,21 +8,21 @@
     <button class="create-post" [routerLink]="['/create']">Create New Post</button>
     @for (post of posts$ | async; track post.id) {
       <div class="post">
-       <div class="post-post">
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.body }}</p>
-     <div class="btn-link">
-      <a [routerLink]="['/post', post.id]">View Details</a>
-      <button class="btn-delete" (click)="deletePost(post.id)">Delete</button>
-      <button class="btn-edit" [routerLink]="['/edit', post.id]">Edit</button>
-     </div>
-       </div>
+        <div class="post-post">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.body }}</p>
+          <div class="btn-link">
+            <a [routerLink]="['/post', post.id]">View Details</a>
+            <button class="btn-delete" (click)="openDeleteModal(post.id)">Delete</button>
+            <button class="btn-edit" [routerLink]="['/edit', post.id]">Edit</button>
+          </div>
+        </div>
       </div>
     }
   </div>
 }
 <app-pagination
-[currentPage]="currentPage"
-[totalPages]="totalPages"
-(pageChange)="onPageChange($event)"
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="onPageChange($event)"
 ></app-pagination>
