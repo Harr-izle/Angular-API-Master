@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 body{
-    // background-color: variables.$background-color;
+    background-color: variables.$background-color;
     font-family: variables.$font-family;
     @include mixins.flex-layout(column, center, center,1rem);
 }

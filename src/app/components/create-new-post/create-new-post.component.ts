@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Post } from '../../interfaces/post';
 import { AppState } from '../../state/post.state';
 import * as PostActions from '../../state/post.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-new-post',
@@ -20,11 +21,12 @@ export class CreateNewPostComponent {
     userId: [1] // Assuming a fixed userId for simplicity
   });
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router,) {}
 
   onSubmit() {
     if (this.postForm.valid) {
       this.store.dispatch(PostActions.createPost({ post: this.postForm.value as Omit<Post, 'id'> }));
+      this.router.navigate(['/posts']);
     }
   }
 }

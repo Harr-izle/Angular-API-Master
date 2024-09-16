@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from '../../interfaces/post';
@@ -12,7 +12,7 @@ import { Comment } from '../../interfaces/comment';
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
@@ -32,5 +32,9 @@ export class PostComponent {
   ngOnInit() {
     const postId = Number(this.route.snapshot.paramMap.get('id'));
     this.store.dispatch(PostActions.loadComments({ postId }));  // Correct usage
+  }
+
+  createPost(){
+    this.store.dispatch(PostActions.createPost({ post: { title: 'title', body: 'body', userId: 1 } }));
   }
 }
